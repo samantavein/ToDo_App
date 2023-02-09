@@ -1,9 +1,4 @@
-// edit page
-
 import { useState, useEffect } from 'react';
-
-// library imports
-import { CheckIcon } from '@heroicons/react/24/solid'
 
 const EditForm = ({ editedTask, updateTask, closeEditMode }) => {
   const [updatedTaskName, setUpdatedTaskName] = useState(editedTask.name);
@@ -32,10 +27,9 @@ const EditForm = ({ editedTask, updateTask, closeEditMode }) => {
       onClick={(e) => {e.target === e.currentTarget && closeEditMode()}}
       >
       <form
-        className="todo"
         onSubmit={handleFormSubmit}
         >
-        <div className="wrapper">
+        <div >
           <input
             type="text"
             id="editTask"
@@ -49,7 +43,6 @@ const EditForm = ({ editedTask, updateTask, closeEditMode }) => {
           />
         </div>
         <button
-          className="btn"
           aria-label={`Confirm edited task to now read ${updatedTaskName}`}
           type="submit"
           >

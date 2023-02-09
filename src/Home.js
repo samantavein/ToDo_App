@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import useLocalStorage from './useLocalStorage'
-import EditForm from './components/EditForm'
-import TaskList from './components/TaskList'
+import EditForm from './EditForm'
+import TaskList from './TaskList'
 
 
 function Home() {
@@ -12,38 +12,34 @@ function Home() {
     const [isEditing, setIsEditing] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
   
-  
     const deleteTask = (id) => {
-      setTasks(prevState => prevState.filter(t => t.id !== id));
+        setTasks(prevState => prevState.filter(t => t.id !== id));
     }
-  
   
     const updateTask = (task) => {
-      setTasks(prevState => prevState.map(t => (
-        t.id === task.id
-          ? { ...t, name: task.name }
-          : t
-      )))
-      closeEditMode();
+        setTasks(prevState => prevState.map(t => (
+            t.id === task.id
+            ? { ...t, name: task.name }
+            : t
+        )))
+        closeEditMode();
     }
-  
     const closeEditMode = () => {
-      setIsEditing(false);
-      previousFocusEl.focus();
+        setIsEditing(false);
+        previousFocusEl.focus();
     }
   
     const enterEditMode = (task) => {
-      setEditedTask(task);
-      setIsEditing(true);
-      setPreviousFocusEl(document.activeElement);
+        setEditedTask(task);
+        setIsEditing(true);
+        setPreviousFocusEl(document.activeElement);
     }
     const filteredTasks = tasks.filter(task =>
         task.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
     return (
-      <div className="container">
-
+    <div className="container">
     <input
         type="text"
         placeholder="Search"
@@ -51,28 +47,27 @@ function Home() {
         onChange={e => setSearchTerm(e.target.value)}
       />
         
-        {
-          isEditing && (
-            <EditForm
-              editedTask={editedTask}
-              updateTask={updateTask}
-              closeEditMode={closeEditMode}
-            />
-          )
-        }
-        
-        
-        {filteredTasks.length > 0 ? (
-        <TaskList
-          tasks={filteredTasks}
-          deleteTask={deleteTask}
-          enterEditMode={enterEditMode}
+    {
+        isEditing && (
+        <EditForm
+            editedTask={editedTask}
+            updateTask={updateTask}
+            closeEditMode={closeEditMode}
         />
-      ) : (
-        <div> No results found </div>
-      )}
-  
-      </div>
+        )
+    }
+           
+    {filteredTasks.length > 0 ? (
+    <TaskList
+        tasks={filteredTasks}
+        deleteTask={deleteTask}
+        enterEditMode={enterEditMode}
+    />
+    ) : (
+    <div> No results found </div>
+    )}
+
+    </div>
     )
   }
   

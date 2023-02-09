@@ -1,11 +1,7 @@
-// basically create page
-
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-// library imports
-
-function CustomForm({ addTask }) {
+function Create({ addTask }) {
   const [task, setTask] = useState("");
   const history = useHistory();
   
@@ -21,24 +17,19 @@ function CustomForm({ addTask }) {
 
   return (
     <form
-      className="todo"
       onSubmit={handleFormSubmit}
       >
-      <div className="wrapper">
+      <div>
         <input
           type="text"
           id="task"
           className="input"
-          value={task}
-          onInput={(e) => setTask(e.target.value)}
+          value={task}     
           required
-          autoFocus
-          maxLength={60}
           placeholder="Enter Task"
         />
       </div>
-      <button
-          className="btn"
+      <button        
           aria-label="Add Task"
           type="submit"       
           >
@@ -51,4 +42,4 @@ function CustomForm({ addTask }) {
   )
 }
 
-export default CustomForm;
+export default Create;

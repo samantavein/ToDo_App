@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import useLocalStorage from './useLocalStorage'
-import EditForm from './EditForm'
+import Edit from './Edit'
 import TaskList from './TaskList'
 
 
@@ -49,7 +49,7 @@ function Home() {
         
     {
         isEditing && (
-        <EditForm
+        <Edit
             editedTask={editedTask}
             updateTask={updateTask}
             closeEditMode={closeEditMode}

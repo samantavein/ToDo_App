@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const EditForm = ({ editedTask, updateTask, closeEditMode }) => {
+const Edit = ({ editedTask, updateTask, closeEditMode }) => {
   const [updatedTaskName, setUpdatedTaskName] = useState(editedTask.name);
 
   useEffect(()=> {
@@ -52,4 +52,4 @@ const EditForm = ({ editedTask, updateTask, closeEditMode }) => {
     </div>
   )
 }
-export default EditForm
+export default Edit

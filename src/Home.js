@@ -20,6 +20,7 @@ function Home() {
         });
     };
 
+    
     const filteredTasks = tasks.filter(task =>
         task.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -32,8 +33,7 @@ function Home() {
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
       />
-           
-    {filteredTasks.length > 0 ? (
+     {filteredTasks.length > 0 ? (
     <TaskList
         tasks={filteredTasks}
         deleteTask={deleteTask}
@@ -43,8 +43,29 @@ function Home() {
     <div> No results found </div>
     )}
 
+
     </div>
     )
   }
   
   export default Home;
+  /*
+      {filteredTasks.length > 0 ? (
+    <TaskList
+        tasks={filteredTasks}
+        deleteTask={deleteTask}
+        enterEditMode={editTask}
+    />
+    ) : (
+    <div> No results found </div>
+    )}
+
+
+    {tasks && (
+        <TaskList
+          tasks={tasks}
+          deleteTask={deleteTask}
+          enterEditMode={editTask}
+        />
+      )}
+  */

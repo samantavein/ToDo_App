@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 function Create({ addTask }) {
   const history = useHistory();
-  const [task, setTask] = useState({ name: null, description: null, date: null });
+  const [task, setTask] = useState({ name: undefined, description: undefined, date: undefined });
 
   const handleChange = (event) => {
     setTask({ ...task, [event.target.name]: event.target.value });

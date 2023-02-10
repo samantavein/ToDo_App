@@ -1,17 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 function Edit({ editedTask, updateTask, closeEditMode }) {
   const [updatedTask, setUpdatedTask] = useState({ name: editedTask.name, description :editedTask.description, date: editedTask.date });
-
-  useEffect(()=> {
-    const closeModalIfEscaped = (e) => {
-      e.key === "Escape" && closeEditMode();
-    }
-    window.addEventListener('keydown', closeModalIfEscaped)
-
-    return () => {
-      window.removeEventListener('keydown', closeModalIfEscaped)
-    }
-  }, [closeEditMode])
 
   const handleSave= (e) => {
     e.preventDefault();
@@ -33,20 +22,23 @@ function Edit({ editedTask, updateTask, closeEditMode }) {
           name="name"
           placeholder="Task name"
           value={updatedTask.name}
-          onChange={e => setUpdatedTask(e.target.value)}
+          onInput={(e) => setUpdatedTask({...updatedTask, name: e.target.value})}
+          required
         />
         <textarea
           name="description"
           placeholder="Description"
           value={updatedTask.description}
-          onChange={e => setUpdatedTask(e.target.value)}
+          onInput={(e) => setUpdatedTask({...updatedTask, description: e.target.value})}
+          required
         />
         <input
           type="date"
           name="date"
           placeholder="Date created"
           value={updatedTask.date}
-          onChange={e => setUpdatedTask(e.target.value)}
+          onInput={(e) => setUpdatedTask({...updatedTask, date: e.target.value})}
+          required
         />
         </form>
         <div className = "margin">

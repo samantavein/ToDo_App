@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import useLocalStorage from './useLocalStorage'
-import { useHistory } from "react-router-dom";
+import { useHistory} from 'react-router-dom';
 
 function Create() {
-
   const [tasks, setTasks] = useLocalStorage('react-todo.tasks', []);
 
   const addTask = (task) => {
@@ -91,3 +90,4 @@ function Create() {
   );
 }
 export default Create;
+

@@ -12,7 +12,7 @@ function Home() {
     const [previousFocusEl, setPreviousFocusEl] = useState(null);
 
     const deleteTask = (id) => {
-        setTasks(prevState => prevState.filter(t => t.id !== id)); 
+        setTasks(prevState => prevState.filter(t => t.id !== id));
     }
 
     const updateTask = (task) => {

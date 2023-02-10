@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './Create'
 import Navbar from './Navbar';
 import Home from "./Home";
-import Edit from "./Edit";
 
 function App() {
   
@@ -17,11 +16,7 @@ function App() {
               <Home />
             </Route>
             <Route exact path ="/create">
-              <Create/>             
-            </Route>
-
-            <Route exact path ="/edit/:id">
-              <Edit/>             
+              <Create />             
             </Route>
           </Switch>
         </div>

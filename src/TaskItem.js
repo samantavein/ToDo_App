@@ -5,23 +5,21 @@ const TaskItem = ({ task, deleteTask,  enterEditMode }) => {
     <li >
       <div >
         <label
-          htmlFor={task.id}
+          key={task.id}
         >
-          {task.name}
+          {task.name} - {task.description} <br /> {task.date}
 
         </label>
-      </div>
-      <div >
-        <button   
-          onClick={() => enterEditMode(task)}
-        >
-          Edit
-        </button>
 
         <button
           onClick={() => deleteTask(task.id)}
         >
           Delete
+        </button>
+        <button   
+          onClick={() => enterEditMode(task)}
+        >
+          Edit
         </button>
 
       </div>

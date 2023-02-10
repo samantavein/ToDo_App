@@ -1,39 +1,25 @@
 import { useState } from 'react'
-
 import useLocalStorage from './useLocalStorage'
-import Edit from './Edit'
-import TaskList from './TaskList'
 
+import TaskList from './TaskList'
+import { useHistory } from "react-router-dom";
 
 function Home() {
     const [tasks, setTasks] = useLocalStorage('react-todo.tasks', []);
-    const [previousFocusEl, setPreviousFocusEl] = useState(null);
-    const [editedTask, setEditedTask] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-  
+    const history = useHistory();
+
     const deleteTask = (id) => {
         setTasks(prevState => prevState.filter(t => t.id !== id));
     }
-  
-    const updateTask = (task) => {
-        setTasks(prevState => prevState.map(t => (
-            t.id === task.id
-            ? { ...t, name: task.name }
-            : t
-        )))
-        closeEditMode();
-    }
-    const closeEditMode = () => {
-        setIsEditing(false);
-        previousFocusEl.focus();
-    }
-  
-    const enterEditMode = (task) => {
-        setEditedTask(task);
-        setIsEditing(true);
-        setPreviousFocusEl(document.activeElement);
-    }
+
+    const editTask = id => {
+        history.push({
+          pathname: "/edit/:id",
+          state: { taskId: id }
+        });
+    };
+
     const filteredTasks = tasks.filter(task =>
         task.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -46,22 +32,12 @@ function Home() {
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
       />
-        
-    {
-        isEditing && (
-        <Edit
-            editedTask={editedTask}
-            updateTask={updateTask}
-            closeEditMode={closeEditMode}
-        />
-        )
-    }
            
     {filteredTasks.length > 0 ? (
     <TaskList
         tasks={filteredTasks}
         deleteTask={deleteTask}
-        enterEditMode={enterEditMode}
+        enterEditMode={editTask}
     />
     ) : (
     <div> No results found </div>

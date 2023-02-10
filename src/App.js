@@ -8,9 +8,6 @@ import Edit from './Edit'
 
 function App() {
   const [tasks, setTasks] = useLocalStorage('react-todo.tasks', []);
-  const [editedTask, setEditedTask] = useState(null);
-  const [previousFocusEl, setPreviousFocusEl] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
 
   const addTask = (task) => {
     setTasks(prevState => [...prevState, task])
@@ -21,14 +18,7 @@ function App() {
         ? { ...t, name: task.name }
         : t
     )))
-    closeEditMode();
   }
-
-  const closeEditMode = () => {
-    setIsEditing(false);
-    previousFocusEl.focus();
-  }
-
 
   return (
     <Router>
@@ -43,12 +33,8 @@ function App() {
               <Create addTask={addTask} />             
             </Route>
 
-            <Route exact path ="/create">
-            <Edit
-            editedTask={editedTask}
-            updateTask={updateTask}
-            closeEditMode={closeEditMode}
-          />        
+            <Route exact path ="/edit/:id">
+            <Edit editedTask={updateTask} />
             </Route>
           </Switch>
         </div>
@@ -58,3 +44,10 @@ function App() {
 }
 
 export default App;
+/*
+<Edit
+editedTask={editedTask}
+updateTask={updateTask}
+closeEditMode={closeEditMode}
+/>  
+*/ 

@@ -1,5 +1,118 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 
+
+function Edit({ editedTask }) {
+  const history = useHistory();
+  const [updatedTask, setUpdatedTask] = useState(editedTask.name);
+
+  const handleChange = (event) => {
+    setUpdatedTask({ ...updatedTask, [event.target.name]: event.target.value });
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    editedTask({...editedTask,
+      id: Date.now(),
+      name: updatedTask.name,
+      description: updatedTask.description,
+      date: updatedTask.date
+    })
+    
+  }
+  
+
+  return (
+    <div className="container">
+      <form>
+        <input
+          type="text"
+          name="name"
+          placeholder="Task name"
+          value={updatedTask.name}
+          onChange={handleChange}
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={updatedTask.description}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          name="date"
+          placeholder="Date created"
+          value={updatedTask.date}
+          onChange={handleChange}
+        />
+        <button className="buttonleft" type="button" onClick={handleSave} >
+          Save
+        </button>
+        <button type="button" onClick={() => history.push("/")}>
+          Cancel
+        </button>
+      </form>
+    </div>
+  );
+}
+export default Edit;
+/*
+function Edit({ addTask }) {
+  const history = useHistory();
+  const [task, setTask] = useState({ name: undefined, description: undefined, date: undefined });
+
+  const handleChange = (event) => {
+    setTask({ ...task, [event.target.name]: event.target.value });
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    addTask({
+      id: Date.now(),
+      name: task.name,
+      description: task.description,
+      date: task.date
+    })
+    setTask({ name: "", description: "", date: "" })
+  }
+  
+
+  return (
+    <div className="container">
+      <form>
+        <input
+          type="text"
+          name="name"
+          placeholder="Task name"
+          value={task.name}
+          onChange={handleChange}
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={task.description}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          name="date"
+          placeholder="Date created"
+          value={task.date}
+          onChange={handleChange}
+        />
+        <button className="buttonleft" type="button" onClick={handleSave} >
+          Save
+        </button>
+        <button type="button" onClick={() => history.push("/")}>
+          Cancel
+        </button>
+      </form>
+    </div>
+  );
+}
+export default Edit;
+*/
+/*
 const Edit = ({ editedTask, updateTask, closeEditMode }) => {
   const [updatedTaskName, setUpdatedTaskName] = useState(editedTask.name);
 
@@ -52,4 +165,6 @@ const Edit = ({ editedTask, updateTask, closeEditMode }) => {
     </div>
   )
 }
+
 export default Edit
+*/

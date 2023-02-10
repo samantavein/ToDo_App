@@ -23,7 +23,7 @@ function Create({ addTask }) {
   
 
   return (
-    <div class="container">
+    <div className="container">
       <form>
         <input
           type="text"
@@ -45,7 +45,7 @@ function Create({ addTask }) {
           value={task.date}
           onChange={handleChange}
         />
-        <button class="buttonleft" type="button" onClick={handleSave} >
+        <button className="buttonleft" type="button" onClick={handleSave} >
           Save
         </button>
         <button type="button" onClick={() => history.push("/")}>

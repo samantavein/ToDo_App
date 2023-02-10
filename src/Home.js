@@ -18,7 +18,7 @@ function Home() {
     const updateTask = (task) => {
         setTasks(prevState => prevState.map(t => (
           t.id === task.id
-            ? { ...t, name: task.name, decription: task.decription, date: task.date }
+            ? { ...t, name: task.name, description: task.description, date: task.date }
             : t
         )))
         closeEditMode();

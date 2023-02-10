@@ -1,16 +1,16 @@
 import { useState } from 'react';
+
 function Edit({ editedTask, updateTask, closeEditMode }) {
   const [updatedTask, setUpdatedTask] = useState({ name: editedTask.name, description :editedTask.description, date: editedTask.date });
 
   const handleSave= (e) => {
     e.preventDefault();
     updateTask({
-      id: Date.now(),
+      id: editedTask.id,
       name: updatedTask.name,
       description: updatedTask.description,
       date: updatedTask.date
     })
-    setUpdatedTask({ name: updatedTask.name, description: updatedTask.description, date: updatedTask.date });
   }
   
   return (

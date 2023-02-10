@@ -1,7 +1,15 @@
 import { useState } from 'react';
+import useLocalStorage from './useLocalStorage'
 import { useHistory } from "react-router-dom";
 
-function Create({ addTask }) {
+function Create() {
+
+  const [tasks, setTasks] = useLocalStorage('react-todo.tasks', []);
+
+  const addTask = (task) => {
+    setTasks(prevState => [...prevState, task])
+  }
+
   const history = useHistory();
   const [task, setTask] = useState({ name: "", description: "", date: "" });
   const [error, setError] = useState({});

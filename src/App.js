@@ -1,16 +1,12 @@
-import useLocalStorage from './useLocalStorage'
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './Create'
 import Navbar from './Navbar';
 import Home from "./Home";
+import Edit from "./Edit";
 
 function App() {
-  const [tasks, setTasks] = useLocalStorage('react-todo.tasks', []);
-
-  const addTask = (task) => {
-    setTasks(prevState => [...prevState, task])
-  }
-
+  
   return (
     <Router>
       <div className="App">
@@ -21,7 +17,11 @@ function App() {
               <Home />
             </Route>
             <Route exact path ="/create">
-              <Create addTask={addTask} />             
+              <Create/>             
+            </Route>
+
+            <Route exact path ="/edit/:id">
+              <Edit/>             
             </Route>
           </Switch>
         </div>

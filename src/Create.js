@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 function Create({ addTask }) {
   const history = useHistory();
-  const [task, setTask] = useState({ name: undefined, description: undefined, date: undefined });
+  const [task, setTask] = useState({ name: "", description: "", date: "" });
   const [error, setError] = useState({});
 
   const handleSave = (e) => {

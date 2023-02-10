@@ -1,27 +1,46 @@
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-
 function Create({ addTask }) {
   const history = useHistory();
   const [task, setTask] = useState({ name: undefined, description: undefined, date: undefined });
-
-  const handleChange = (event) => {
-    setTask({ ...task, [event.target.name]: event.target.value });
-  };
+  const [error, setError] = useState({});
 
   const handleSave = (e) => {
     e.preventDefault();
-    addTask({
-      id: Date.now(),
-      name: task.name,
-      description: task.description,
-      date: task.date
-    })
+
+    let hasError = false;
+    const newError = {};
+  
+    if (!task.name) {
+      newError.name = "Name is required";
+      hasError = true;
+    }
+  
+    if (!task.description) {
+      newError.description = "Description is required";
+      hasError = true;
+    }
+  
+    if (!task.date) {
+      newError.date = "Date is required";
+      hasError = true;
+    }
+  
+    if (hasError) {
+      setError(newError);
+    }
+    else{
+      addTask({
+        id: Date.now(),
+        name: task.name,
+        description: task.description,
+        date: task.date
+      })
+    }
     setTask({ name: "", description: "", date: "" })
   }
   
-
   return (
     <div className="container">
       <form>
@@ -30,21 +49,29 @@ function Create({ addTask }) {
           name="name"
           placeholder="Task name"
           value={task.name}
-          onChange={handleChange}
+          onInput={(e) => setTask({...task, name: e.target.value})}
+          required
         />
+        {error.name && <div className="error">{error.name}</div>}
         <textarea
           name="description"
           placeholder="Description"
           value={task.description}
-          onChange={handleChange}
+          onInput={(e) => setTask({...task, description: e.target.value})}
+          required
+
         />
+         {error.description && <div className="error">{error.description}</div>}
         <input
           type="date"
           name="date"
           placeholder="Date created"
           value={task.date}
-          onChange={handleChange}
+          onInput={(e) => setTask({...task, date: e.target.value})}
+          required
+
         />
+        {error.date && <div className="error">{error.date}</div>}
         <button className="buttonleft" type="button" onClick={handleSave} >
           Save
         </button>

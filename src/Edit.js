@@ -1,57 +1,65 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-
-
-function Edit({ editedTask }) {
+function Edit({ editedTask, updateTask, closeEditMode }) {
+  const [updatedTask, setUpdatedTask] = useState({ name: editedTask.name, description :editedTask.description, date: editedTask.date });
   const history = useHistory();
-  const [updatedTask, setUpdatedTask] = useState(editedTask.name);
 
-  const handleChange = (event) => {
-    setUpdatedTask({ ...updatedTask, [event.target.name]: event.target.value });
-  };
+  useEffect(()=> {
+    const closeModalIfEscaped = (e) => {
+      e.key === "Escape" && closeEditMode();
+    }
+    window.addEventListener('keydown', closeModalIfEscaped)
 
-  const handleSave = (e) => {
+    return () => {
+      window.removeEventListener('keydown', closeModalIfEscaped)
+    }
+  }, [closeEditMode])
+
+  const handleSave= (e) => {
     e.preventDefault();
-    editedTask({...editedTask,
+    updateTask({
       id: Date.now(),
       name: updatedTask.name,
       description: updatedTask.description,
       date: updatedTask.date
     })
-    
+    setUpdatedTask({ name: updatedTask.name, description: updatedTask.description, date: updatedTask.date });
   }
   
 
   return (
-    <div className="container">
+    <div className="container"
+      onClick={(e) => {e.target === e.currentTarget && closeEditMode()}}>
       <form>
         <input
           type="text"
           name="name"
           placeholder="Task name"
           value={updatedTask.name}
-          onChange={handleChange}
+          onChange={e => setUpdatedTask(e.target.value)}
         />
         <textarea
           name="description"
           placeholder="Description"
           value={updatedTask.description}
-          onChange={handleChange}
+          onChange={e => setUpdatedTask(e.target.value)}
         />
         <input
           type="date"
           name="date"
           placeholder="Date created"
           value={updatedTask.date}
-          onChange={handleChange}
+          onChange={e => setUpdatedTask(e.target.value)}
         />
-        <button className="buttonleft" type="button" onClick={handleSave} >
-          Save
-        </button>
-        <button type="button" onClick={() => history.push("/")}>
-          Cancel
-        </button>
-      </form>
+        </form>
+        <div className = "margin">
+          <button className="buttonleft" type="button" onClick={handleSave} >
+            Save
+          </button>
+          <button type="button" onClick={closeEditMode}>
+            Cancel
+          </button>
+        </div>
     </div>
   );
 }

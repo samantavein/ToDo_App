@@ -4,7 +4,6 @@ import Create from './Create'
 import Navbar from './Navbar';
 import Home from "./Home";
 
-
 function App() {
   const [tasks, setTasks] = useLocalStorage('react-todo.tasks', []);
 
@@ -32,15 +31,3 @@ function App() {
 }
 
 export default App;
-/*
-<Edit
-editedTask={editedTask}
-updateTask={updateTask}
-closeEditMode={closeEditMode}
-/>  
-
-            <Route exact path ="/edit/:id">
-            <Edit editedTask={editedTask}
-            updateTask= {updateTask} />
-            </Route>
-*/ 

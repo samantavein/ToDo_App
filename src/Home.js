@@ -35,11 +35,11 @@ function Home() {
         setIsEditing(true);
         setPreviousFocusEl(document.activeElement);
     };
-   /*
+
     const filteredTasks = tasks.filter(task =>
         task.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  */
+
     return (
     <div className="container">
         <input
@@ -49,15 +49,6 @@ function Home() {
             onChange={e => setSearchTerm(e.target.value)}
         />
 
-
-{tasks && (
-        <TaskList
-          tasks={tasks}
-          deleteTask={deleteTask}
-          enterEditMode={editTask}
-        />
-      )}
-
         {isEditing && (
             <Edit
                 editedTask={editedTask}
@@ -65,33 +56,6 @@ function Home() {
                 closeEditMode={closeEditMode}
             />
         )}
-
-    </div>
-    )
-}
-  
-export default Home;
-  /*
-      {filteredTasks.length > 0 ? (
-    <TaskList
-        tasks={filteredTasks}
-        deleteTask={deleteTask}
-        enterEditMode={editTask}
-    />
-    ) : (
-    <div> No results found </div>
-    )}
-
-
-    {tasks && (
-        <TaskList
-          tasks={tasks}
-          deleteTask={deleteTask}
-          enterEditMode={editTask}
-        />
-      )}
-
-
 
         {filteredTasks.length > 0 ? (
             <TaskList
@@ -102,5 +66,8 @@ export default Home;
             ) : (
             <div> No results found </div>
         )}
-
-  */
+    </div>
+    )
+}
+  
+export default Home;
